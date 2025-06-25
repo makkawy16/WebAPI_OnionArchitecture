@@ -29,6 +29,7 @@ namespace WebAPI_OnionArchitecture
             }
 
             app.UseHttpsRedirection();
+            app.UseCors();
 
             app.UseAuthorization();
 
