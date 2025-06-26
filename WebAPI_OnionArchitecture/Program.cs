@@ -1,4 +1,6 @@
 
+using WebAPI_OnionArchitecture.Configurations;
+
 namespace WebAPI_OnionArchitecture
 {
     public class Program
@@ -9,10 +11,13 @@ namespace WebAPI_OnionArchitecture
 
             // Add services to the container.
 
+            builder.Services.ConfigureCors();
+
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
 
             var app = builder.Build();
 
@@ -24,6 +29,7 @@ namespace WebAPI_OnionArchitecture
             }
 
             app.UseHttpsRedirection();
+            app.UseCors();
 
             app.UseAuthorization();
 
