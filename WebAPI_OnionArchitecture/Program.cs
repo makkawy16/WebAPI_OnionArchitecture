@@ -15,6 +15,8 @@ namespace WebAPI_OnionArchitecture
             LogManager.Setup().LoadConfigurationFromFile(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
             builder.Services.ConfigureCors();
 
+
+            builder.Services.ConfigureISingletoneService();
             builder.Services.AddSingleton<ILoggerManager, LoggerManager>();
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
