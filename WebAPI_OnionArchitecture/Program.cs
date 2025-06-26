@@ -13,6 +13,8 @@ namespace WebAPI_OnionArchitecture
 
             builder.Services.ConfigureCors();
 
+
+            builder.Services.ConfigureISingletoneService();
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
