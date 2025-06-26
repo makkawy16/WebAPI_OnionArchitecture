@@ -12,12 +12,15 @@ namespace WebAPI_OnionArchitecture
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            LogManager.Setup().LoadConfigurationFromFile(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
+            string? logPath = builder.Configuration.GetValue<string>("PathForLog");
+            LogManager.Setup().LoadConfigurationFromFile(Path.Combine(logPath??"", "nlog.config"));
+
+
             builder.Services.ConfigureCors();
 
-
             builder.Services.ConfigureISingletoneService();
-            builder.Services.AddSingleton<ILoggerManager, LoggerManager>();
+            //builder.Services.AddSingleton<ILoggerManager, LoggerManager>();
+
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();

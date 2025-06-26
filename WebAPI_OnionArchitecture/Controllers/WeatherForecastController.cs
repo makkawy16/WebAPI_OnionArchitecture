@@ -1,3 +1,4 @@
+using Contracts.Logger;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI_OnionArchitecture.Controllers
@@ -10,17 +11,19 @@ namespace WebAPI_OnionArchitecture.Controllers
         {
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
+  
+        private readonly ILoggerManager _loggerManager;
 
-        private readonly ILogger<WeatherForecastController> _logger;
-
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController( ILoggerManager loggerManager)
         {
-            _logger = logger;
+            _loggerManager = loggerManager;
         }
 
         [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
         {
+            _loggerManager.LogInfo("Try to log");
+            _loggerManager.LogError("Error");
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
