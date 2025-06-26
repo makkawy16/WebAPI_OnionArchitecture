@@ -25,24 +25,31 @@ namespace WebAPI_OnionArchitecture.Configurations
         /// </summary>
         public static void ConfigureISingletoneService(this IServiceCollection services)
         {
-            Assembly targetAssemply = Assembly.Load("Contracts");
-            Type interfaceType = typeof(ISingletone);
+           // Assembly targetAssemply = Assembly.Load("LoggerService");  
+                Type interfaceType = typeof(ISingletone);
 
-            //Get Any thing implements ISingletone
-            IEnumerable<Type> singletoneServices = targetAssemply.GetTypes()
-                .Where(t => interfaceType.IsAssignableFrom(t) && t.IsClass && !t.IsAbstract);
+            Assembly[] assemblies = {
+                                    Assembly.Load("LoggerService")
+                                };
 
-            foreach (Type serviceType in singletoneServices)
+            foreach (Assembly targetAssemply in assemblies)
             {
-                IEnumerable<Type> interfaces = serviceType.GetInterfaces().Where(i => i != typeof(ISingletone));
+                //Get Any thing implements ISingletone
+                IEnumerable<Type> singletoneServices = targetAssemply.GetTypes()
+                    .Where(t => interfaceType.IsAssignableFrom(t) && t.IsClass && !t.IsAbstract);
 
-                foreach (Type serviceIntefarce in interfaces)
+                foreach (Type serviceType in singletoneServices)
                 {
-                    // Register the class type for each interface it implements
-                    services.AddSingleton(serviceIntefarce, serviceType);
+                    IEnumerable<Type> interfaces = serviceType.GetInterfaces().Where(i => i != typeof(ISingletone));
+
+                    foreach (Type serviceIntefarce in interfaces)
+                    {
+                        // Register the class type for each interface it implements
+                        services.AddSingleton(serviceIntefarce, serviceType);
+                    }
+                    // Register the class itself
+                    services.AddSingleton(serviceType);
                 }
-                // Register the class itself
-                services.AddSingleton(serviceType);
             }
         }
     }
