@@ -22,6 +22,7 @@ namespace WebAPI_OnionArchitecture.Controllers
         [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
         {
+            //test logging
             _loggerManager.LogInfo("Try to log");
             _loggerManager.LogError("Error");
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
