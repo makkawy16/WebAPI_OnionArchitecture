@@ -5,9 +5,6 @@ namespace Entities.Models
 {
     public class Employee
     {
-        //TO Do
-        //Move All Validations to entity configurations
-        [Column("EmployeeId")]
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Employee name is a required field.")]
