@@ -5,9 +5,6 @@ namespace Entities.Models
 {
     public class Company
     {
-        //TO Do
-        //Move All Validations to entity configurations
-        [Column("CompanyId")]
         public int Id { get; set; }
         [Required(ErrorMessage = "Company name is a required field.")]
         [MaxLength(60, ErrorMessage = "Maximum length for the Name is 60 characters.")]
