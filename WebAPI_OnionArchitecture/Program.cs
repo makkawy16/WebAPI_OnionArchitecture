@@ -1,6 +1,6 @@
-using Contracts.Logger;
-using LoggerService.Logger;
+using Microsoft.EntityFrameworkCore;
 using NLog;
+using Repository.Context;
 using WebAPI_OnionArchitecture.Configurations;
 
 namespace WebAPI_OnionArchitecture
@@ -13,8 +13,12 @@ namespace WebAPI_OnionArchitecture
 
             // Add services to the container.
             string? logPath = builder.Configuration.GetValue<string>("PathForLog");
-            LogManager.Setup().LoadConfigurationFromFile(Path.Combine(logPath??"", "nlog.config"));
+            LogManager.Setup().LoadConfigurationFromFile(Path.Combine(logPath ?? "", "nlog.config"));
 
+            builder.Services.AddDbContext<AppDbContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionString"), b => b.MigrationsAssembly("WebAPI_OnionArchitecture"));
+            });
 
             builder.Services.ConfigureCors();
 
