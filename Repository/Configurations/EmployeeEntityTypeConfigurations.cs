@@ -8,7 +8,7 @@ namespace Repository.Configurations
     {
         public void Configure(EntityTypeBuilder<Employee> builder)
         {
-            builder.Property(x => x.Name).HasColumnName("EmployeeId");
+            builder.Property(x => x.Id).HasColumnName("EmployeeId");
             builder.HasData
         (
             new Employee
