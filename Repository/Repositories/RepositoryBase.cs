@@ -32,5 +32,14 @@ namespace Repository.Repositories
 
         public void Update(T entity)
         => appContext.Set<T>().Update(entity);
+
+        public async Task<T> FindByIdAsync(int id) => await appContext.Set<T>().FindAsync(id);
+
+        public async Task<T> FindFirstOrDefaultAsync(Expression<Func<T, bool>> predicate) => await appContext.Set<T>().FirstOrDefaultAsync(predicate);
+
+        public async Task<bool> ExistAsync(Expression<Func<T, bool>> predicate) => await appContext.Set<T>().AnyAsync(predicate);
+
+        public  T GetAllIncluding(Expression<Func<T, bool>> predicate, Expression<Func<T, object>> includingPredicate)
+            => (T)appContext.Set<T>().Where(predicate).Include(includingPredicate);
     }
 }

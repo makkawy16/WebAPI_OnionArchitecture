@@ -9,6 +9,9 @@ namespace Contracts.Repositories
         void Create(T entity);
         void Update(T entity);
         void Delete(T entity);
-
+        Task<T> FindByIdAsync(int id);
+        Task<T> FindFirstOrDefaultAsync(Expression<Func<T, bool>> predicate);
+        Task<bool> ExistAsync(Expression<Func<T, bool>> predicate);
+        T GetAllIncluding(Expression<Func<T, bool>> predicate, Expression<Func<T, object>> includingPredicate);
     }
 }
