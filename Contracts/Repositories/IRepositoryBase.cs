@@ -13,6 +13,5 @@ namespace Contracts.Repositories
         Task<T> FindFirstOrDefaultAsync(Expression<Func<T, bool>> predicate);
         Task<bool> ExistAsync(Expression<Func<T, bool>> predicate);
         T GetAllIncluding(Expression<Func<T, bool>> predicate, Expression<Func<T, object>> includingPredicate);
-        void SaveChanges();
     }
 }
