@@ -41,5 +41,7 @@ namespace Repository.Repositories
 
         public  T GetAllIncluding(Expression<Func<T, bool>> predicate, Expression<Func<T, object>> includingPredicate)
             => (T)appContext.Set<T>().Where(predicate).Include(includingPredicate);
+
+        public void SaveChanges() => appContext.SaveChanges();
     }
 }
