@@ -23,6 +23,7 @@ namespace WebAPI_OnionArchitecture
             builder.Services.ConfigureCors();
 
             builder.Services.ConfigureISingletoneService();
+            builder.Services.ConfigureIScopedService();
             //builder.Services.AddSingleton<ILoggerManager, LoggerManager>();
 
             builder.Services.AddControllers();
