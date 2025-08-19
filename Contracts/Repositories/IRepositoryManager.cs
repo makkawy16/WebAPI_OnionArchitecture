@@ -1,6 +1,8 @@
-﻿namespace Contracts.Repositories
+﻿using Contracts.RegisterServices;
+
+namespace Contracts.Repositories
 {
-    public interface IRepositoryManager
+    public interface IRepositoryManager : IScopedService
     {
         ICompanyRepository Company { get; }
         IEmployeeRepository Employee { get; }
